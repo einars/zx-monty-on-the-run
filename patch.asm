@@ -8,9 +8,14 @@
     call cht ; orig: ld bc, 0xeffe
 
 
+
     org 0x879b
 infinite_lives:
-    or (hl) ; dec (hl)
+    jp on_death ; dec (hl); jr nz, 0x87ad
+
+    org 0xb866
+    ; ld hl, (maybe_hiscore_print)
+    ld hl, (death_counter)
 
     org 0xaa61
 play_music:
@@ -20,6 +25,8 @@ play_music:
     halt
     halt
     ret
+
+
 
     org 0xf938
     ; here was music
@@ -58,6 +65,22 @@ cht_enable
     ld a, 0
     ld (hl), a
 
+    ld hl, (death_counter)
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+    inc hl
+    ld (death_counter), hl
+    ; update death counter on screen
+    ld bc, 0x001b
+    call 0xb7e4
+
 cht_quit
     ld bc, 0xeffe ; original code
     ret
@@ -82,5 +105,21 @@ smc3 ld a, 0
     jr cht_quit
 
 cht_enabled db 0
+death_counter dw 0
+
+on_death:
+    ld hl, (death_counter)
+    inc hl
+    ld (death_counter), hl
+
+    ; update death counter on screen
+    ld bc, 0x001b
+    call 0xb7e4
+
+    jp 0x87ad
+
+
+    org 0xb887
+    db "  DEATHS:"
 
     savebin "out/motr.patched.bin", 0x6000, 40960
