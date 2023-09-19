@@ -4,9 +4,19 @@ set -o pipefail -o errexit -o nounset
 
 cd "$(dirname "$0")/.."
 
-compiler='/proj/isaac/tools/sjasmplus/build/sjasmplus'
+./scripts/compile
 
-$compiler \
-  --syntax=ab \
-  patch.asm
+out=monty-on-the-run.retro.tap
 
+rm -f "$out"
+
+taput \
+  add -b -o 10 -n "MOTR" motr/motr.bas "$out"
+taput \
+  add -o 16384 -n "MOTR1" motr/motr.patched.scr "$out"
+taput \
+  add -o 24576 -n "MOTR2" out/motr.patched.bin "$out"
+
+echo $out
+
+taput list "$out"
