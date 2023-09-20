@@ -1,0 +1,13 @@
+Required items:
+- 02 jetpack         obvs flying scenes
+- 04 rope            allows accessing top of the tree stump
+                     - changes d542: E4 have, 99 have not
+- 12 passport   934e required for a happy ending
+- 13 gasmask    934f opens door that allows passing into the sewage works 
+                     after picking up the cake
+- 16 rum        9352 required when collecting the key on the ship for the exit to open
+                     - changes 8f61: 00 have, 5f have not
+                     (removes the head in front of the ships exit)
+
+picking up the P on the top of treestump enables exit.
+

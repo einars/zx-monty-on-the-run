@@ -3,5 +3,6 @@
 - infinite lives
 - death counter
 - three seconds of invincibility on R
+- proper starting items kit
 
-https://twitch.tv/retroistaba
+Made for my friends at https://twitch.tv/retroistaba
